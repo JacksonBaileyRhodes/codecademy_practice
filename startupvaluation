@@ -1,0 +1,20 @@
+-- Get a look at the table
+select * from startups limit 5;
+-- Unique count of total companies
+select count(*) from startups;
+-- Summation of startup valuation
+select sum(valuation) from startups;
+-- Maximum capital raise by startups
+select name, max(raised) from startups;
+-- Maximum capital raise by seed-stage startups
+select name, max(raised) from startups where stage = 'Seed';
+-- Oldest startups
+select * from startups order by founded asc limit 5;
+-- Average startup valuation
+select round(avg(valuation),2) from startups;
+-- Average startup valuation by category
+select category, round(avg(valuation),2) from startups group by category order by round(avg(valuation),2) desc;
+-- Count of startups within each category that are competitive, ID'ed as more than 3
+select category, count(*) from startups group by category having count(*)>3 order by count(*) desc;
+-- Average startup employee sizing by location
+select location, round(avg(employees)) from startups group by location having avg(employees)>500 order by round(avg(employees)) desc;
